@@ -26,11 +26,11 @@ public class UserService {
 		return userRepository.findById(id).orElse(null);
 	}
 	
-	public User saveCollege(User user) {
+	public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    public void deleteCollegeById(Long id) {
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 	
