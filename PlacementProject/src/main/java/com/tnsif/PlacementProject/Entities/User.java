@@ -1,9 +1,14 @@
 package com.tnsif.PlacementProject.Entities;
 
+
+
+import com.tnsif.PlacementProject.Extras.UserType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 
 @Entity
 public class User {
@@ -14,15 +19,23 @@ public class User {
 	
 	private String Username;
 	private String Password;
-	public User(Long userId, String username, String password) {
-		super();
-		UserId = userId;
-		Username = username;
-		Password = password;
+	private UserType Type;
+	
+	
+	
+	
+	public User() {
 	}
+	
 	public Long getUserId() {
 		return UserId;
 	}
+	public User(Long userId, String username, String password) {
+	super();
+	UserId = userId;
+	Username = username;
+	Password = password;
+}
 	public void setUserId(Long userId) {
 		UserId = userId;
 	}

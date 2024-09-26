@@ -1,9 +1,11 @@
 package com.tnsif.PlacementProject.Entities;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 
@@ -18,10 +20,14 @@ public class College {
     private String location;
     private String contact;
 
+	
+
+	public College() {
+	}
 
 
-
-	public College(Long collegeId, String name, String location, String contact) {
+	public College( Long collegeId, String name,
+			String location, String contact) {
 		super();
 		this.collegeId = collegeId;
 		this.name = name;
