@@ -1,9 +1,13 @@
 package com.tnsif.PlacementProject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -13,11 +17,14 @@ public class Placement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placementId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "college_college_id")
+    @JsonIgnore
     private College college;
 
     private String companyName;
     private String jobRole;
+    private Long collegeId;
     
     
     
@@ -59,6 +66,14 @@ public class Placement {
 	public String toString() {
 		return "Placement [placementId=" + placementId + ", college=" + college + ", companyName=" + companyName
 				+ ", jobRole=" + jobRole + "]";
+	}
+
+	public Long getCollegeId() {
+		return college.getCollegeId();
+	}
+
+	public void setCollegeId(Long collegeId) {
+		this.collegeId = collegeId;
 	}
 
     
