@@ -1,5 +1,7 @@
 package com.tnsif.PlacementProject.Entities;
 
+import java.util.NoSuchElementException;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -9,14 +11,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import com.tnsif.PlacementProject.Controllers.CollegeController;
 
 @Entity
 public class Placement {
 
+	//primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placementId;
 
+    /**
+     * Many-to-one relationship with the College entity.
+     * FetchType.EAGER means the college is loaded together with the placement.
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "college_college_id")
     @JsonIgnore
@@ -24,13 +32,14 @@ public class Placement {
 
     private String companyName;
     private String jobRole;
+    //extra collegeid field for getter to set the college id so that the whole college details can be ignored
     private Long collegeId;
     
     
-    
+    //default constructor for the jpa
 	public Placement() {
 	}
-	
+	//Constructors
 	public Placement(Long placementId, College college, String companyName, String jobRole) {
 		super();
 		this.placementId = placementId;
@@ -68,13 +77,18 @@ public class Placement {
 				+ ", jobRole=" + jobRole + "]";
 	}
 
+	//check and handling the null values
 	public Long getCollegeId() {
-		return college.getCollegeId();
+		if (college != null) {
+	        return college.getCollegeId();
+	    } else {
+	        return null;
+	    }
 	}
 
 	public void setCollegeId(Long collegeId) {
-		this.collegeId = collegeId;
-	}
+        this.collegeId = collegeId;
+    }
 
     
 	

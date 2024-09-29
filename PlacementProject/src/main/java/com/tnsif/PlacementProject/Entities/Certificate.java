@@ -12,17 +12,29 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Certificate {
-
+	/**
+     * Unique identifier for the Certificate.
+     */
     @Id
     private Long certificateId;
 
+    /**
+     * The Student associated with this Certificate.
+     * This is a ManyToOne relationship (one Student can have many Certificates).
+     * FetchType.EAGER fetches the Student data along with the Certificate in a single database call for efficiency.
+     * @JsonIgnore prevents the student object from being serialized during JSON conversion to avoid infinite recursion.
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_student_id")
-    @JsonIgnore
+//    @JsonIgnore
     private Student student;
 
     private String courseName;
     private Date dateIssued;
+    /**
+     * Redundant field for student ID. This might be useful for specific use cases 
+     * but can be removed if student object is always retrieved.
+     */
     private Long studentId;
    
     
@@ -70,9 +82,26 @@ public class Certificate {
 				+ "]";
 	}
 
+	/**
+     * This method retrieves the student ID from the associated Student object.
+     * This might be useful if you need the student ID without fetching the entire student object.
+     * 
+     * @return The student ID associated with the Certificate.
+     */
 	 public Long getStudentId() {
+		 if (student != null) {
 	        return student.getStudentId();
 	    }
+		 else {
+			 return null;
+		 }
+	 }
+	 /**
+	     * Setter for studentId. This might be useful for specific scenarios, but consider
+	     * if directly setting the student object is a better approach.
+	     * 
+	     * @param studentId The student ID to set.
+	     */
 
 	public void setStudentId(Long studentId) {
 		this.studentId = studentId;

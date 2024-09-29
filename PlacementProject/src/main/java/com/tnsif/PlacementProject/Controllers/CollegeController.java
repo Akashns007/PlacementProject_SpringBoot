@@ -78,4 +78,11 @@ public class CollegeController {
     public ResponseEntity<String> handleCollegeNotFoundException(NoSuchElementException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+    
+    
+    //PostCheck
+    public Boolean checkCollege(Long id) {
+    	College existingCollege = collegeService.getCollegeById(id);
+        return true;
+    }
 }

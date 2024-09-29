@@ -9,21 +9,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
+//users can be of 2 types student or the college
 @Entity
 public class User {
 	
+	//primary key
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long UserId;
 	
 	private String Username;
 	private String Password;
+	//enum with student as 0 and college as 1
 	private UserType Type;
 	
 	
 	
-	
+	//default constructor
 	public User() {
 	}
 	
